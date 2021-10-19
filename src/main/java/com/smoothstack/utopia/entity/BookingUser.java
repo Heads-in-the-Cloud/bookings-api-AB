@@ -1,43 +1,31 @@
 package com.smoothstack.utopia.entity;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 
 @Entity
-@Table(name = "booking")
-public class Booking {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+@Table(name = "booking_user")
+public class BookingUser {
+    @OneToOne
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "user_id")
+    private Integer userId;
 
-    @Column(name = "confirmation_code")
-    private String confirmationCode;
-
-    public Integer getId() {
-        return id;
+    public Booking getBooking() {
+        return booking;
     }
-    public void setId(final Integer id) {
-        this.id = id;
+    public void setBooking(final Booking booking) {
+        this.booking = booking;
     }
-    public Boolean getIsActive() {
-        return isActive;
+    public Integer getUserId() {
+        return userId;
     }
-    public void setIsActive(final Boolean isActive) {
-        this.isActive = isActive;
-    }
-    public String getConfirmationCode() {
-        return confirmationCode;
-    }
-    public void setConfirmationCode(final String confirmationCode) {
-        this.confirmationCode = confirmationCode;
+    public void setUserId(final Integer userId) {
+        this.userId = userId;
     }
 }

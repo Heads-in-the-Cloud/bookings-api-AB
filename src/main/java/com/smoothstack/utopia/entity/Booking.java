@@ -1,7 +1,5 @@
 package com.smoothstack.utopia.entity;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;

@@ -7,14 +7,17 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 
 @Entity
-@Table(name = "booking_agent")
-public class BookingAgent {
+@Table(name = "booking_guest")
+public class BookingGuest {
     @OneToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
-    @Column(name = "agent_id")
-    private Integer agentId;
+    @Column(name = "contact_email")
+    private String email;
+
+    @Column(name = "contact_phone")
+    private String phone;
 
     public Booking getBooking() {
         return booking;
@@ -22,10 +25,16 @@ public class BookingAgent {
     public void setBooking(final Booking booking) {
         this.booking = booking;
     }
-    public Integer getAgentId() {
-        return agentId;
+    public String getEmail() {
+        return email;
     }
-    public void setAgentId(final Integer agentId) {
-        this.agentId = agentId;
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(final String phone) {
+        this.phone = phone;
     }
 }

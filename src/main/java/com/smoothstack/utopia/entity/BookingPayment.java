@@ -1,43 +1,43 @@
 package com.smoothstack.utopia.entity;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 
 @Entity
-@Table(name = "booking")
-public class Booking {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+@Table(name = "booking_payment")
+public class BookingPayment {
+    @OneToOne
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "stripe_id")
+    private String stripeId;
 
-    @Column(name = "confirmation_code")
-    private String confirmationCode;
+    @Column(name = "refunded")
+    private Boolean wasRefunded;
 
-    public Integer getId() {
-        return id;
+    public Booking getBooking() {
+        return booking;
     }
-    public void setId(final Integer id) {
-        this.id = id;
+    public void setBooking(final Booking booking) {
+        this.booking = booking;
     }
-    public Boolean getIsActive() {
-        return isActive;
+    public String getStripeId() {
+        return stripeId;
     }
-    public void setIsActive(final Boolean isActive) {
-        this.isActive = isActive;
+    public void setStripeId(final String stripeId) {
+        this.stripeId = stripeId;
     }
-    public String getConfirmationCode() {
-        return confirmationCode;
+    public Boolean getWasRefunded() {
+        return wasRefunded;
     }
-    public void setConfirmationCode(final String confirmationCode) {
-        this.confirmationCode = confirmationCode;
+    public void setWasRefunded(final Boolean wasRefunded) {
+        this.wasRefunded = wasRefunded;
     }
 }
