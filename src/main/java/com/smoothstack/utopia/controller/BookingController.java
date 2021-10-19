@@ -1,8 +1,8 @@
 package com.smoothstack.utopia.controller;
 
 import com.smoothstack.utopia.NotFoundException;
-import com.smoothstack.utopia.entity.Flight;
-import com.smoothstack.utopia.service.FlightService;
+import com.smoothstack.utopia.entity.Booking;
+import com.smoothstack.utopia.service.BookingService;
 
 import java.util.List;
 
@@ -20,46 +20,46 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
-@RequestMapping("/flight")
-public class FlightController {
+@RequestMapping("/booking")
+public class BookingController {
 
-    private final FlightService service;
+    private final BookingService service;
 
-    public FlightController(final FlightService service) {
+    public BookingController(final BookingService service) {
       this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<Flight> create(@RequestBody final Flight flight) {
-        service.save(flight);
-        return ResponseEntity.ok(flight);
+    public ResponseEntity<Booking> create(@RequestBody final Booking booking) {
+        service.save(booking);
+        return ResponseEntity.ok(booking);
     }
 
     @GetMapping
-    public @ResponseBody List<Flight> readAll() {
+    public @ResponseBody List<Booking> readAll() {
         return service.selectAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Flight> readById(@PathVariable final Integer id) {
-        final Flight flight = service.selectById(id).orElseThrow(NotFoundException::new);
-        return ResponseEntity.ok(flight);
+    public ResponseEntity<Booking> readById(@PathVariable final Integer id) {
+        final Booking booking = service.selectById(id).orElseThrow(NotFoundException::new);
+        return ResponseEntity.ok(booking);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateById(@PathVariable final Integer id, @RequestBody final Flight flight) {
-        if(id != flight.getId()) {
+    public ResponseEntity<String> updateById(@PathVariable final Integer id, @RequestBody final Booking booking) {
+        if(id != booking.getId()) {
             return new ResponseEntity<String>("Entity ids don't match", HttpStatus.BAD_REQUEST);
         }
-        final Flight _ogFlight = service.selectById(id).orElseThrow(NotFoundException::new);
-        service.save(flight);
-        return ResponseEntity.ok("Flight updated successfully");
+        final Booking _ogBooking = service.selectById(id).orElseThrow(NotFoundException::new);
+        service.save(booking);
+        return ResponseEntity.ok("Booking updated successfully");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable final Integer id) {
-        final Flight flight = service.selectById(id).orElseThrow(NotFoundException::new);
-        service.delete(flight);
+        final Booking booking = service.selectById(id).orElseThrow(NotFoundException::new);
+        service.delete(booking);
         return ResponseEntity.noContent().build();
     }
 }
