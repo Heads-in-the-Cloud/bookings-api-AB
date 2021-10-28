@@ -1,11 +1,12 @@
 package com.smoothstack.utopia.controller;
 
-import com.smoothstack.utopia.NotFoundException;
+import com.smoothstack.utopia.exception.*;
 import com.smoothstack.utopia.entity.Passenger;
 import com.smoothstack.utopia.service.PassengerService;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
-@RequestMapping("/passenger")
+@RequestMapping("/passengers")
 public class PassengerController {
 
     private final PassengerService service;
@@ -30,7 +31,7 @@ public class PassengerController {
     }
 
     @PostMapping
-    public ResponseEntity<Passenger> create(@RequestBody final Passenger passenger) {
+    public ResponseEntity<Passenger> create(@Valid @RequestBody final Passenger passenger) {
         service.save(passenger);
         return ResponseEntity.ok(passenger);
     }
@@ -47,9 +48,9 @@ public class PassengerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateById(@PathVariable final Integer id, @RequestBody final Passenger passenger) {
+    public ResponseEntity<String> updateById(@PathVariable final Integer id, @Valid @RequestBody final Passenger passenger) {
         if(id != passenger.getId()) {
-            return new ResponseEntity<String>("Entity ids don't match", HttpStatus.BAD_REQUEST);
+            throw new InvalidUpdateIdException();
         }
         final Passenger _ogPassenger = service.selectById(id).orElseThrow(NotFoundException::new);
         service.save(passenger);

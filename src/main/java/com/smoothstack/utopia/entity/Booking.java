@@ -6,17 +6,23 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "booking")
 public class Booking {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
     @Column(name = "is_active")
     private Boolean isActive;
 
+    @NotNull
+    @Size(max = 255)
     @Column(name = "confirmation_code")
     private String confirmationCode;
 

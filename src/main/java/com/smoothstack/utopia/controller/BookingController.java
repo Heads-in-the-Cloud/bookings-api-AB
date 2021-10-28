@@ -1,11 +1,12 @@
 package com.smoothstack.utopia.controller;
 
-import com.smoothstack.utopia.NotFoundException;
+import com.smoothstack.utopia.exception.*;
 import com.smoothstack.utopia.entity.Booking;
 import com.smoothstack.utopia.service.BookingService;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/bookings")
 public class BookingController {
 
     private final BookingService service;
@@ -30,7 +31,7 @@ public class BookingController {
     }
 
     @PostMapping
-    public ResponseEntity<Booking> create(@RequestBody final Booking booking) {
+    public ResponseEntity<Booking> create(@Valid @RequestBody final Booking booking) {
         service.save(booking);
         return ResponseEntity.ok(booking);
     }
@@ -47,9 +48,9 @@ public class BookingController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateById(@PathVariable final Integer id, @RequestBody final Booking booking) {
+    public ResponseEntity<String> updateById(@PathVariable final Integer id, @Valid @RequestBody final Booking booking) {
         if(id != booking.getId()) {
-            return new ResponseEntity<String>("Entity ids don't match", HttpStatus.BAD_REQUEST);
+            throw new InvalidUpdateIdException();
         }
         final Booking _ogBooking = service.selectById(id).orElseThrow(NotFoundException::new);
         service.save(booking);

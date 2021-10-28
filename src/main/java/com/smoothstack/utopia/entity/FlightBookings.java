@@ -2,30 +2,22 @@ package com.smoothstack.utopia.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "flight_bookings")
 public class FlightBookings {
-    @Column(name = "flight_id")
-    private Integer flightId;
+    @EmbeddedId
+    private FlightBookingsId id;
 
-    @ManyToOne
-    @JoinColumn(name = "booking_id")
-    private Booking booking;
-
-    public Integer getFlightId() {
-        return flightId;
+    public FlightBookingsId getId() {
+        return id;
     }
-    public void setFlightId(final Integer flightId) {
-        this.flightId = flightId;
-    }
-    public Booking getBooking() {
-        return booking;
-    }
-    public void setBooking(final Booking booking) {
-        this.booking = booking;
+    public void setId(final FlightBookingsId id) {
+        this.id = id;
     }
 }

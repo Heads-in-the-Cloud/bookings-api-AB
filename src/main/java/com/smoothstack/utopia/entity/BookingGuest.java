@@ -2,28 +2,32 @@ package com.smoothstack.utopia.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.OneToOne;
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
+import javax.persistence.EmbeddedId;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "booking_guest")
 public class BookingGuest {
-    @OneToOne
-    @JoinColumn(name = "booking_id")
-    private Booking booking;
+    @EmbeddedId
+    private BookingId id;
 
+    @NotNull
+    @Size(max = 255)
     @Column(name = "contact_email")
     private String email;
 
+    @NotNull
+    @Size(max = 45)
     @Column(name = "contact_phone")
     private String phone;
 
-    public Booking getBooking() {
-        return booking;
+    public BookingId getId() {
+        return id;
     }
-    public void setBooking(final Booking booking) {
-        this.booking = booking;
+    public void setId(final BookingId id) {
+        this.id = id;
     }
     public String getEmail() {
         return email;

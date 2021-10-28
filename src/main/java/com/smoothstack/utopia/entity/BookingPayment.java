@@ -2,31 +2,31 @@ package com.smoothstack.utopia.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToOne;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "booking_payment")
 public class BookingPayment {
-    @OneToOne
-    @JoinColumn(name = "booking_id")
-    private Booking booking;
+    @EmbeddedId
+    private BookingId id;
 
+    @NotNull
+    @Size(max = 255)
     @Column(name = "stripe_id")
     private String stripeId;
 
+    @NotNull
     @Column(name = "refunded")
     private Boolean wasRefunded;
 
-    public Booking getBooking() {
-        return booking;
+    public BookingId getId() {
+        return id;
     }
-    public void setBooking(final Booking booking) {
-        this.booking = booking;
+    public void setId(final BookingId id) {
+        this.id = id;
     }
     public String getStripeId() {
         return stripeId;
