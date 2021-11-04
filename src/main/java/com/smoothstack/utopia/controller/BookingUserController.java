@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
-@RequestMapping("/booking-users")
+@RequestMapping("/api/booking-users")
 public class BookingUserController {
 
     private final BookingUserService service;
