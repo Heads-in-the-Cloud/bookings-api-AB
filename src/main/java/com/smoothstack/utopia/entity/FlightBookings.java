@@ -8,16 +8,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "flight_bookings")
 public class FlightBookings {
     @EmbeddedId
     private FlightBookingsId id;
-
-    public FlightBookingsId getId() {
-        return id;
-    }
-    public void setId(final FlightBookingsId id) {
-        this.id = id;
-    }
 }

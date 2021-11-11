@@ -20,15 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+import lombok.AllArgsConstructor;
+
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/flight-bookings")
 public class FlightBookingsController {
 
     private final FlightBookingsService service;
-
-    public FlightBookingsController(final FlightBookingsService service) {
-      this.service = service;
-    }
 
     @PostMapping
     public ResponseEntity<FlightBookings> create(@Valid @RequestBody final FlightBookings flightBookings) {

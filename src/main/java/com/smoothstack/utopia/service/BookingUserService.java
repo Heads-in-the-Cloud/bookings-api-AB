@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class BookingUserService {
     private final BookingUserDao dao;
-
-    public BookingUserService(final BookingUserDao dao) {
-        this.dao = dao;
-    }
 
     public void save(final BookingUser bookingUser) {
         dao.save(bookingUser);

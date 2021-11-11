@@ -9,7 +9,12 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "booking")
 public class Booking {
     @Id
@@ -25,23 +30,4 @@ public class Booking {
     @Size(max = 255)
     @Column(name = "confirmation_code")
     private String confirmationCode;
-
-    public Integer getId() {
-        return id;
-    }
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-    public Boolean getIsActive() {
-        return isActive;
-    }
-    public void setIsActive(final Boolean isActive) {
-        this.isActive = isActive;
-    }
-    public String getConfirmationCode() {
-        return confirmationCode;
-    }
-    public void setConfirmationCode(final String confirmationCode) {
-        this.confirmationCode = confirmationCode;
-    }
 }

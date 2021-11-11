@@ -13,7 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "passenger")
 public class Passenger {
     @Id
@@ -47,41 +52,4 @@ public class Passenger {
     @NotNull
     @Size(max = 45)
     private String address;
-
-    public Integer getId() {
-        return id;
-    }
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-    public Booking getBooking() {
-        return booking;
-    }
-    public void setBooking(final Booking booking) {
-        this.booking = booking;
-    }
-    public String getGivenName() {
-        return givenName;
-    }
-    public void setGivenName(final String givenName) {
-        this.givenName = givenName;
-    }
-    public String getFamilyName() {
-        return familyName;
-    }
-    public void setFamilyName(final String familyName) {
-        this.familyName = familyName;
-    }
-    public String getGender() {
-        return gender;
-    }
-    public void setGender(final String gender) {
-        this.gender = gender;
-    }
-    public String getAddress() {
-        return address;
-    }
-    public void setAddress(final String address) {
-        this.address = address;
-    }
 }

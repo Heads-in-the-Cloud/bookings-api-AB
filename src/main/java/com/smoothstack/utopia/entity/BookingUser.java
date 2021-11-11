@@ -6,7 +6,12 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "booking_user")
 public class BookingUser {
     @EmbeddedId
@@ -15,17 +20,4 @@ public class BookingUser {
     @NotNull
     @Column(name = "user_id")
     private Integer userId;
-
-    public BookingId getId() {
-        return id;
-    }
-    public void setId(final BookingId id) {
-        this.id = id;
-    }
-    public Integer getUserId() {
-        return userId;
-    }
-    public void setUserId(final Integer userId) {
-        this.userId = userId;
-    }
 }

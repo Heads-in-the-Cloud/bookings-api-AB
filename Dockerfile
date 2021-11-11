@@ -1,4 +1,4 @@
-FROM maven:3-openjdk-11 AS maven
+FROM maven:3-openjdk-11 AS build
 
 WORKDIR /usr/src/app
 COPY . /usr/src/app
@@ -7,10 +7,11 @@ RUN mvn package
 
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-ARG JAR_FILE=utopia-bookings-api-0.0.1-SNAPSHOT.war
+ENV WAR_FILE=bookings-api.war
 
 WORKDIR /opt/app
 
-COPY --from=maven /usr/src/app/target/${JAR_FILE} /opt/app/
+COPY --from=build /usr/src/app/target/$WAR_FILE .
 
-ENTRYPOINT ["java","-jar","utopia-bookings-api-0.0.1-SNAPSHOT.war"]
+ENTRYPOINT java -jar $WAR_FILE
+

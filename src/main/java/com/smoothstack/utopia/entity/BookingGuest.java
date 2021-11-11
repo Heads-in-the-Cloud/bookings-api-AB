@@ -7,7 +7,12 @@ import javax.persistence.EmbeddedId;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "booking_guest")
 public class BookingGuest {
     @EmbeddedId
@@ -22,23 +27,4 @@ public class BookingGuest {
     @Size(max = 45)
     @Column(name = "contact_phone")
     private String phone;
-
-    public BookingId getId() {
-        return id;
-    }
-    public void setId(final BookingId id) {
-        this.id = id;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(final String phone) {
-        this.phone = phone;
-    }
 }

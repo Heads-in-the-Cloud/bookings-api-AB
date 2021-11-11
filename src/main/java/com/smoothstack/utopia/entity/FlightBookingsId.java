@@ -8,6 +8,11 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Embeddable
 public class FlightBookingsId implements Serializable {
     @NotNull
@@ -18,17 +23,4 @@ public class FlightBookingsId implements Serializable {
     @ManyToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
-
-    public Integer getFlightId() {
-        return flightId;
-    }
-    public void setFlightId(final Integer flightId) {
-        this.flightId = flightId;
-    }
-    public Booking getBooking() {
-        return booking;
-    }
-    public void setBooking(final Booking booking) {
-        this.booking = booking;
-    }
 }

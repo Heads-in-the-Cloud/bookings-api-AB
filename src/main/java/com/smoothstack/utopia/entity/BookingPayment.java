@@ -7,7 +7,12 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "booking_payment")
 public class BookingPayment {
     @EmbeddedId
@@ -21,23 +26,4 @@ public class BookingPayment {
     @NotNull
     @Column(name = "refunded")
     private Boolean wasRefunded;
-
-    public BookingId getId() {
-        return id;
-    }
-    public void setId(final BookingId id) {
-        this.id = id;
-    }
-    public String getStripeId() {
-        return stripeId;
-    }
-    public void setStripeId(final String stripeId) {
-        this.stripeId = stripeId;
-    }
-    public Boolean getWasRefunded() {
-        return wasRefunded;
-    }
-    public void setWasRefunded(final Boolean wasRefunded) {
-        this.wasRefunded = wasRefunded;
-    }
 }
