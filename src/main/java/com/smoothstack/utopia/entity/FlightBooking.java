@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "flight_bookings")
-public class FlightBookings {
+public class FlightBooking {
     @EmbeddedId
-    private FlightBookingsId id;
+    private FlightBookingId id;
 }

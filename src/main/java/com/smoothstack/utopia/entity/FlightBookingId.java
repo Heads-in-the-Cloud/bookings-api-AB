@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Embeddable;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 
@@ -14,15 +15,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Embeddable
-public class BookingId implements Serializable {
+public class FlightBookingId implements Serializable {
     @NotNull
-    @OneToOne
+    @Column(name = "flight_id")
+    private Integer flightId;
+
+    @NotNull
+    @ManyToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
     @Override
     public int hashCode() {
-        return Objects.hash(booking);
+        return Objects.hash(flightId, booking);
     }
 
     @Override
@@ -33,7 +38,8 @@ public class BookingId implements Serializable {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final BookingId bookingId = (BookingId) obj;
-        return booking.equals(bookingId.booking);
+        final FlightBookingId flightBookingId = (FlightBookingId) obj;
+        return flightId.equals(flightBookingId.flightId)
+            && booking.equals(flightBookingId.booking);
     }
 }
