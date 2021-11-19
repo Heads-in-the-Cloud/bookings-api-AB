@@ -18,13 +18,12 @@ import lombok.Setter;
 @Table(name = "booking")
 public class Booking {
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
     @Column(name = "is_active")
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     @NotNull
     @Size(max = 255)

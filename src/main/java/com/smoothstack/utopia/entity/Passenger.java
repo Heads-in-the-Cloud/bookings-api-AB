@@ -22,7 +22,6 @@ import lombok.Setter;
 @Table(name = "passenger")
 public class Passenger {
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

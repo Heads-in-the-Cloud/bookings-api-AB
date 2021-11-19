@@ -25,5 +25,5 @@ public class BookingPayment {
 
     @NotNull
     @Column(name = "refunded")
-    private Boolean wasRefunded;
+    private Boolean wasRefunded = false;
 }

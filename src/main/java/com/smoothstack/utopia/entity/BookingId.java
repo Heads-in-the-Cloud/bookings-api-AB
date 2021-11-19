@@ -6,7 +6,6 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
-import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +14,6 @@ import lombok.Setter;
 @Setter
 @Embeddable
 public class BookingId implements Serializable {
-    @NotNull
     @OneToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
