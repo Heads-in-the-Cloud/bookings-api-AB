@@ -14,6 +14,7 @@ pipeline {
             steps {
                 sh """
                 docker run -d \
+                    --rm \
                     --name bookings-microservice \
                     --env DB_URL=${env.DB_URL} \
                     --env DB_USERNAME=${env.DB_USERNAME} \
