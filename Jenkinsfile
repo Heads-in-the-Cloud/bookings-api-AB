@@ -10,7 +10,7 @@ pipeline {
             }
         }
 
-        stage('Run') {
+        stage('Run detached for 30sec') {
             steps {
                 sh """
                 docker run -d \
@@ -22,8 +22,13 @@ pipeline {
                     -p 8090:8080 \
                     austinbaugh/utopia-bookings-microservice:${env.BUILD_ID}
                 sleep 30
-                docker kill bookings-microservice
                 """
+            }
+        }
+
+        stage('Kill') {
+            steps {
+                sh "docker kill bookings-microservice"
             }
         }
     }
