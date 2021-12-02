@@ -13,12 +13,15 @@ pipeline {
         stage('Run') {
             steps {
                 sh """
-                docker run \
+                docker run -d \
+                    --name bookings-microservice \
                     --env DB_URL=${env.DB_URL} \
                     --env DB_USERNAME=${env.DB_USERNAME} \
                     --env DB_PASSWORD=${env.DB_PASSWORD} \
-                    --expose 8080 \
+                    -p 8080:8080 \
                     austinbaugh/utopia-bookings-microservice:${env.BUILD_ID}
+                sleep 30
+                docker kill bookings-microservice
                 """
             }
         }
