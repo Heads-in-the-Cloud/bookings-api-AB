@@ -18,7 +18,7 @@ pipeline {
                     --env DB_URL=${env.DB_URL} \
                     --env DB_USERNAME=${env.DB_USERNAME} \
                     --env DB_PASSWORD=${env.DB_PASSWORD} \
-                    -p 8080:8080 \
+                    -p 8090:8080 \
                     austinbaugh/utopia-bookings-microservice:${env.BUILD_ID}
                 sleep 30
                 docker kill bookings-microservice
