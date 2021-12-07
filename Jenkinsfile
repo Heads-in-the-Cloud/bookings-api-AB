@@ -2,41 +2,46 @@
 pipeline {
     agent any
 
+    environment {
+        image_label = "austinbaugh/utopia-bookings-microservice"
+        git_commit_hash ="${sh(returnStdout: true, script: 'git rev-parse HEAD')}"
+        image = ""
+    }
+
     stages {
+        stage('Package') {
+            steps {
+                sh "./mvnw package"
+            }
+        }
+
         stage('Build') {
             steps {
-                sh "./mvnw clean package"
-                sh "docker build . -t austinbaugh/utopia-bookings-microservice:${env.BUILD_ID}"
+                script {
+                    image = docker.build image_label
+                }
             }
         }
 
-        stage('Run detached for 30sec') {
+        stage('Push to registry') {
             steps {
-                sh """
-                    docker run -d \
-                        --rm \
-                        --name bookings-microservice \
-                        --env DB_URL=${env.DB_URL} \
-                        --env DB_USERNAME=${env.DB_USERNAME} \
-                        --env DB_PASSWORD=${env.DB_PASSWORD} \
-                        --env JWT_SECRET=${env.JWT_SECRET} \
-                        -p 8090:8080 \
-                        austinbaugh/utopia-bookings-microservice:${env.BUILD_ID}
-                """
-                sh "sleep 30"
+                script {
+                    docker.withRegistry('', 'registry-creds') {
+                        image.push("$git_commit_hash")
+                        image.push('latest')
+                    }
+                }
             }
         }
 
-        stage('Test') {
+        stage('Clean up') {
             steps {
-                sh "./test.sh 8090"
-            }
-        }
-
-        stage('Kill') {
-            steps {
-                sh "docker kill bookings-microservice"
+                sh "./mvnw clean"
+                sh "docker rmi $image_label:$git_commit_hash"
+                sh "docker rmi $image_label:latest"
             }
         }
     }
 }
+
+
