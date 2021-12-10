@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        image_label = "bookings-microservice-ab"
+        image_label = "ab-bookings-microservice"
         ecr_uri = "${}"
         git_commit_hash = "${sh(returnStdout: true, script: 'git rev-parse HEAD')}"
         image = ""
