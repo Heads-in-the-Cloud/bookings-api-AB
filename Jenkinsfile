@@ -4,7 +4,6 @@ pipeline {
 
     environment {
         image_label = "ab-bookings-microservice"
-        ecr_uri = "${}"
         git_commit_hash = "${sh(returnStdout: true, script: 'git rev-parse HEAD')}"
         image = ""
     }
@@ -38,8 +37,7 @@ pipeline {
         stage('Clean up') {
             steps {
                 sh "./mvnw clean"
-                sh "docker rmi $image_label:$git_commit_hash"
-                sh "docker rmi $image_label:latest"
+                sh "docker rmi $image_label"
             }
         }
     }
