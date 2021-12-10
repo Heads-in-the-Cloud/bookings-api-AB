@@ -27,7 +27,7 @@ pipeline {
         stage('Push to registry') {
             steps {
                 script {
-                    docker.withRegistry(BOOKINGS_ECR_URI, "ecr:us-west-2:credential-id") {
+                    docker.withRegistry(BOOKINGS_ECR_URI, "ecr:us-west-2:ecr-creds") {
                         image.push("$git_commit_hash")
                         image.push('latest')
                     }
