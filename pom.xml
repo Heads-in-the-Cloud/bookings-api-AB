@@ -14,7 +14,7 @@
 
   <groupId>com.smoothstack.utopia</groupId>
   <artifactId>bookings-microservice</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.4-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>bookings-microservice</name>
   <properties>
@@ -48,11 +48,13 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jdbc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.amazonaws.secretsmanager</groupId>
+      <artifactId>aws-secretsmanager-jdbc</artifactId>
+      <version>1.0.5</version>
     </dependency>
 
     <dependency>
@@ -79,7 +81,7 @@
   </dependencies>
 
   <build>
-    <finalName>bookings-microservice</finalName>
+    <finalName>app</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
