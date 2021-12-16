@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Package') {
             steps {
-                sh "./mvnw package"
+                sh "./mvnw clean package"
             }
         }
 
@@ -26,7 +26,7 @@ pipeline {
         stage('Push to registry') {
             steps {
                 script {
-                    docker.withRegistry(BOOKINGS_ECR_URI, "ecr:us-west-2:ecr-creds") {
+                    docker.withRegistry(BOOKINGS_ECR_URI_AB, "ecr:us-west-2:ecr-creds") {
                         image.push("$git_commit_hash")
                         image.push('latest')
                     }
@@ -36,7 +36,6 @@ pipeline {
 
         stage('Clean up') {
             steps {
-                sh "./mvnw clean"
                 sh "docker rmi $image_label"
             }
         }
