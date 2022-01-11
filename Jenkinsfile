@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         image_label = "ab-bookings-microservice"
-        git_commit_hash = "${sh(returnStdout: true, script: 'git rev-parse HEAD')}"
+        git_commit_hash = "${sh(returnStdout: true, script: 'git rev-parse --short=8 HEAD')}"
         image = ""
     }
 
