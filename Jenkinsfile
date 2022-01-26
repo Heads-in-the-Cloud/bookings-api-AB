@@ -25,7 +25,7 @@ pipeline {
         ).trim()
 
         ecr_uri = "${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com"
-        image_label = "bookings-microservice-${params.ProjectId.toLowerCase()}"
+        image_label = "${params.ProjectId.toLowerCase()}-bookings-microservice"
         image = null
         packaged = false
         built = false
