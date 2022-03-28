@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Component
 public class EnvVariableConfig {
-    @Value("${jwt.secret}")
+    @Value("${JWT_SECRET}")
     private String jwtSecret;
 }
